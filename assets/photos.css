@@ -1,0 +1,55 @@
+/* Public-domain Lowcountry photography
+   Hunting Island marsh: https://commons.wikimedia.org/wiki/File:Hunting_Island_2.jpg
+   Downtown Beaufort: https://commons.wikimedia.org/wiki/File:Downtown_Beaufort.JPG
+   Historic Beaufort County Courthouse: https://commons.wikimedia.org/wiki/File:Beaufort_-_Beaufort_County_Court_House.jpg
+*/
+
+.photo-main,
+.photo-small,
+.attorney-photo{
+  position:relative;
+  overflow:hidden;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+}
+
+.photo-main{
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/07/Hunting_Island_2.jpg')!important;
+  background-position:center center!important;
+}
+
+.photo-small{
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/57/Downtown_Beaufort.JPG')!important;
+  background-position:center center!important;
+}
+
+.attorney-photo{
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/6/63/Beaufort_-_Beaufort_County_Court_House.jpg')!important;
+  background-position:center center!important;
+}
+
+.photo-main > span,
+.photo-main > small,
+.photo-small > span,
+.photo-small > small,
+.attorney-photo > span,
+.attorney-photo > small{
+  opacity:0;
+  pointer-events:none;
+}
+
+.attorney-photo::after{
+  content:'Historic Beaufort County Courthouse · c. 1915';
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  max-width:calc(100% - 36px);
+  padding:8px 11px;
+  background:rgba(252,251,248,.92);
+  border:1px solid rgba(211,220,224,.95);
+  color:#30414b;
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
