@@ -6,6 +6,13 @@
     document.head.appendChild(styles);
   }
 
+  if (!document.querySelector('link[href="/assets/photos.css"]')) {
+    const photoStyles = document.createElement('link');
+    photoStyles.rel = 'stylesheet';
+    photoStyles.href = '/assets/photos.css';
+    document.head.appendChild(photoStyles);
+  }
+
   const header = document.querySelector('.site-header');
   if (header && !document.querySelector('.audience-bar')) {
     const bar = document.createElement('div');
