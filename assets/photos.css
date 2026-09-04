@@ -4,6 +4,15 @@
    Historic Beaufort County Courthouse: https://commons.wikimedia.org/wiki/File:Beaufort_-_Beaufort_County_Court_House.jpg
 */
 
+/* The source photos are landscape-oriented, so the hero collage is shaped
+   around their natural proportions rather than forcing them into tall crops. */
+.hero-collage{
+  min-height:560px!important;
+  grid-template-columns:1.35fr .65fr!important;
+  grid-template-rows:minmax(0,1fr) 188px!important;
+  gap:12px!important;
+}
+
 .photo-main,
 .photo-small,
 .attorney-photo{
@@ -11,21 +20,38 @@
   overflow:hidden;
   background-repeat:no-repeat!important;
   background-size:cover!important;
+  background-color:#e8eef0!important;
 }
 
 .photo-main{
-  background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/07/Hunting_Island_2.jpg')!important;
-  background-position:center center!important;
+  grid-column:1 / -1!important;
+  grid-row:1!important;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Hunting_Island_2.jpg/1600px-Hunting_Island_2.jpg')!important;
+  background-position:center 58%!important;
 }
 
 .photo-small{
-  background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/57/Downtown_Beaufort.JPG')!important;
-  background-position:center center!important;
+  grid-column:1!important;
+  grid-row:2!important;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Downtown_Beaufort.JPG/1000px-Downtown_Beaufort.JPG')!important;
+  background-position:center 48%!important;
+}
+
+.standard-card{
+  grid-column:2!important;
+  grid-row:2!important;
+}
+
+/* Give the courthouse a wider, more photographic frame so the building is
+   readable instead of being cut down to a narrow center crop. */
+.attorney-feature{
+  grid-template-columns:.96fr 1.04fr!important;
 }
 
 .attorney-photo{
-  background-image:url('https://upload.wikimedia.org/wikipedia/commons/6/63/Beaufort_-_Beaufort_County_Court_House.jpg')!important;
-  background-position:center center!important;
+  min-height:430px!important;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Beaufort_-_Beaufort_County_Court_House.jpg/1200px-Beaufort_-_Beaufort_County_Court_House.jpg')!important;
+  background-position:center 46%!important;
 }
 
 .photo-main > span,
@@ -45,11 +71,34 @@
   bottom:18px;
   max-width:calc(100% - 36px);
   padding:8px 11px;
-  background:rgba(252,251,248,.92);
+  background:rgba(252,251,248,.94);
   border:1px solid rgba(211,220,224,.95);
   color:#30414b;
   font-size:10px;
   font-weight:750;
   letter-spacing:.06em;
   text-transform:uppercase;
+}
+
+@media(max-width:900px){
+  .hero-collage{
+    min-height:500px!important;
+    grid-template-columns:1.35fr .65fr!important;
+    grid-template-rows:minmax(0,1fr) 165px!important;
+  }
+  .attorney-feature{grid-template-columns:1fr!important}
+  .attorney-photo{min-height:360px!important}
+}
+
+@media(max-width:620px){
+  .hero-collage{
+    min-height:0!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:260px 175px auto!important;
+  }
+  .photo-main{grid-column:1!important;grid-row:1!important;background-position:center 58%!important}
+  .photo-small{grid-column:1!important;grid-row:2!important;background-position:center 50%!important}
+  .standard-card{grid-column:1!important;grid-row:3!important;min-height:175px}
+  .attorney-photo{min-height:290px!important;background-position:center center!important}
+  .attorney-photo::after{left:12px;bottom:12px;max-width:calc(100% - 24px)}
 }
