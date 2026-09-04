@@ -1,4 +1,11 @@
 (() => {
+  if (!document.querySelector('link[href="/assets/typography.css"]')) {
+    const typographyStyles = document.createElement('link');
+    typographyStyles.rel = 'stylesheet';
+    typographyStyles.href = '/assets/typography.css';
+    document.head.appendChild(typographyStyles);
+  }
+
   if (!document.querySelector('link[href="/assets/client-pages.css"]')) {
     const styles = document.createElement('link');
     styles.rel = 'stylesheet';
