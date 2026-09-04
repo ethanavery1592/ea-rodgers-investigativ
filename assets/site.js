@@ -34,6 +34,26 @@
     header.insertAdjacentElement('afterend', bar);
   }
 
+  const primaryNav = document.querySelector('.site-header nav');
+  if (primaryNav && !primaryNav.querySelector('a[href="/about/"]')) {
+    const aboutLink = document.createElement('a');
+    aboutLink.href = '/about/';
+    aboutLink.textContent = 'About';
+    const contactLink = [...primaryNav.querySelectorAll('a')]
+      .find((link) => link.textContent.trim() === 'Contact');
+    if (contactLink) primaryNav.insertBefore(aboutLink, contactLink);
+    else primaryNav.appendChild(aboutLink);
+  }
+
+  document.querySelectorAll('.footer-links').forEach((footerLinks) => {
+    if (!footerLinks.querySelector('a[href="/about/"]')) {
+      const aboutLink = document.createElement('a');
+      aboutLink.href = '/about/';
+      aboutLink.textContent = 'About';
+      footerLinks.appendChild(aboutLink);
+    }
+  });
+
   const tabButtons = document.querySelector('.tab-buttons');
   const tabStage = document.querySelector('.tab-stage');
 
@@ -143,6 +163,23 @@
         'Background / public-source research',
         'Other'
       ]
+    },
+    '/about/': {
+      clientType: null,
+      eyebrow: 'Confidential consultation',
+      heading: 'Start with the question you need answered.',
+      intro: 'Tell us the general nature of the matter and what you need to establish. We can discuss sensitive details after the inquiry is reviewed.',
+      matterPlaceholder: 'Select matter type',
+      matterOptions: [
+        'Surveillance',
+        'Domestic / family matter',
+        'Litigation support',
+        'Employee theft / corporate investigation',
+        'Internal fraud',
+        'Insurance / claims investigation',
+        'Background / locate',
+        'Other'
+      ]
     }
   };
 
@@ -158,7 +195,11 @@
       section.id = 'consultation';
       section.className = 'section section-consult';
 
-      const clientTypeOptions = [
+      const clientTypePlaceholder = intakeConfig.clientType
+        ? ''
+        : '<option value="" selected disabled>Select client type</option>';
+
+      const clientTypeOptions = clientTypePlaceholder + [
         'Private client',
         'Attorney / law firm',
         'Business / employer',
@@ -166,7 +207,11 @@
         'Other'
       ].map((option) => `<option${option === intakeConfig.clientType ? ' selected' : ''}>${option}</option>`).join('');
 
-      const matterOptions = intakeConfig.matterOptions
+      const matterPlaceholder = intakeConfig.matterPlaceholder
+        ? `<option value="" selected disabled>${intakeConfig.matterPlaceholder}</option>`
+        : '';
+
+      const matterOptions = matterPlaceholder + intakeConfig.matterOptions
         .map((option) => `<option>${option}</option>`)
         .join('');
 
