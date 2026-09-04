@@ -4,8 +4,7 @@
    Historic Beaufort County Courthouse: https://commons.wikimedia.org/wiki/File:Beaufort_-_Beaufort_County_Court_House.jpg
 */
 
-/* The source photos are landscape-oriented, so the hero collage is shaped
-   around their natural proportions rather than forcing them into tall crops. */
+/* Keep the improved landscape layout, but use the reliable original image URLs. */
 .hero-collage{
   min-height:560px!important;
   grid-template-columns:1.35fr .65fr!important;
@@ -26,14 +25,14 @@
 .photo-main{
   grid-column:1 / -1!important;
   grid-row:1!important;
-  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Hunting_Island_2.jpg/1600px-Hunting_Island_2.jpg')!important;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/07/Hunting_Island_2.jpg')!important;
   background-position:center 58%!important;
 }
 
 .photo-small{
   grid-column:1!important;
   grid-row:2!important;
-  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Downtown_Beaufort.JPG/1000px-Downtown_Beaufort.JPG')!important;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/57/Downtown_Beaufort.JPG')!important;
   background-position:center 48%!important;
 }
 
@@ -42,15 +41,13 @@
   grid-row:2!important;
 }
 
-/* Give the courthouse a wider, more photographic frame so the building is
-   readable instead of being cut down to a narrow center crop. */
 .attorney-feature{
   grid-template-columns:.96fr 1.04fr!important;
 }
 
 .attorney-photo{
   min-height:430px!important;
-  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Beaufort_-_Beaufort_County_Court_House.jpg/1200px-Beaufort_-_Beaufort_County_Court_House.jpg')!important;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/6/63/Beaufort_-_Beaufort_County_Court_House.jpg')!important;
   background-position:center 46%!important;
 }
 
