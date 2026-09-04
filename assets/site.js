@@ -88,6 +88,147 @@
   const attorneyLink = document.querySelector('.attorney-copy .button[href="#consultation"]');
   if (attorneyLink) attorneyLink.href = '/attorneys-law-firms/';
 
+  const clientPageConfig = {
+    '/private-clients/': {
+      clientType: 'Private client',
+      eyebrow: 'Confidential consultation',
+      heading: 'Tell us what you need to establish.',
+      intro: 'Keep the initial message brief. If the matter is appropriate for the firm, the details can be discussed directly.',
+      matterOptions: [
+        'Domestic / family matter',
+        'Surveillance',
+        'Child custody / cohabitation',
+        'Background / locate',
+        'Other'
+      ]
+    },
+    '/attorneys-law-firms/': {
+      clientType: 'Attorney / law firm',
+      eyebrow: 'Attorney case intake',
+      heading: 'Send the investigative objective.',
+      intro: 'Provide the basic assignment, location, and objective. Privileged or highly sensitive material can be handled after the engagement is accepted.',
+      matterOptions: [
+        'Litigation support',
+        'Family law investigation',
+        'Criminal defense investigation',
+        'Witness interview / locate',
+        'Surveillance',
+        'Other'
+      ]
+    },
+    '/corporate-business/': {
+      clientType: 'Business / employer',
+      eyebrow: 'Corporate case intake',
+      heading: 'Tell us what is not adding up.',
+      intro: 'Keep the initial inquiry high-level. Sensitive employee information and internal records can be transferred through an appropriate process after review.',
+      matterOptions: [
+        'Employee theft / corporate investigation',
+        'Internal fraud',
+        'Workplace misconduct',
+        'Time theft / misuse of assets',
+        'Surveillance',
+        'Other'
+      ]
+    },
+    '/insurance-claims/': {
+      clientType: 'Insurance / claims professional',
+      eyebrow: 'Claims assignment intake',
+      heading: 'Tell us what needs to be verified.',
+      intro: 'Provide the claim type, general location, investigative objective, and desired timeframe. Sensitive claim material can be transferred securely after assignment acceptance.',
+      matterOptions: [
+        'Workers’ compensation / claims surveillance',
+        'Activity check',
+        'Witness interview / statement',
+        'Scene / fact verification',
+        'Background / public-source research',
+        'Other'
+      ]
+    }
+  };
+
+  const path = window.location.pathname.endsWith('/')
+    ? window.location.pathname
+    : `${window.location.pathname}/`;
+  const intakeConfig = clientPageConfig[path];
+
+  if (intakeConfig && !document.querySelector('#consultation')) {
+    const main = document.querySelector('main');
+    if (main) {
+      const section = document.createElement('section');
+      section.id = 'consultation';
+      section.className = 'section section-consult';
+
+      const clientTypeOptions = [
+        'Private client',
+        'Attorney / law firm',
+        'Business / employer',
+        'Insurance / claims professional',
+        'Other'
+      ].map((option) => `<option${option === intakeConfig.clientType ? ' selected' : ''}>${option}</option>`).join('');
+
+      const matterOptions = intakeConfig.matterOptions
+        .map((option) => `<option>${option}</option>`)
+        .join('');
+
+      section.innerHTML = `
+        <div class="container intake-shell">
+          <aside class="intake-intro">
+            <p class="eyebrow">${intakeConfig.eyebrow}</p>
+            <h2>${intakeConfig.heading}</h2>
+            <p>${intakeConfig.intro}</p>
+            <p class="fine-print"><strong>Confidentiality note:</strong> Submission of an inquiry does not create an investigator-client relationship. Avoid sending privileged, highly sensitive, or unnecessary personal information until an engagement has been accepted.</p>
+          </aside>
+
+          <div class="intake-form-wrap">
+            <p class="eyebrow">Case intake</p>
+            <h2>Request a consultation.</h2>
+
+            <form name="consultation" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" class="intake-form">
+              <input type="hidden" name="form-name" value="consultation">
+              <p class="hidden-field">
+                <label>Do not fill this out if you are human: <input name="bot-field"></label>
+              </p>
+
+              <label>Full name
+                <input required type="text" name="name" autocomplete="name">
+              </label>
+
+              <label>Phone or email
+                <input required type="text" name="contact">
+              </label>
+
+              <label>I am a
+                <select name="client_type">${clientTypeOptions}</select>
+              </label>
+
+              <label>Matter type
+                <select name="matter_type">${matterOptions}</select>
+              </label>
+
+              <label class="full-width">City / State
+                <input type="text" name="location" autocomplete="address-level2">
+              </label>
+
+              <label class="full-width">Brief description
+                <textarea name="description" rows="5" placeholder="Briefly describe the situation and what you need to determine."></textarea>
+              </label>
+
+              <div class="full-width form-footer">
+                <button class="button button-soft" type="submit">Request Consultation ↗</button>
+                <span>Submitted through Broadwater Investigative Group’s secure website intake.</span>
+              </div>
+            </form>
+          </div>
+        </div>`;
+
+      main.appendChild(section);
+
+      document.querySelectorAll('a[href="/#consultation"]').forEach((link) => {
+        link.setAttribute('href', '#consultation');
+      });
+    }
+  }
+
   const tabs = [...document.querySelectorAll('[data-tab]')];
   const panels = [...document.querySelectorAll('[data-panel]')];
 
